@@ -27,13 +27,3 @@ if (window.PromiseRejectionEvent) {
   });
 }
 
-// 读取map文件
-const rawSourceMapJsonData = JSON.parse(fs.readFileSync(mapFilePath, "utf-8"));
-// 创建soucemer实例
-const consumer = await new sourceMap.SourceMapConsumer(rawSourceMapJsonData);
-// 源码追踪
-consumer.originalPositionFor({ line: 2, column: 10 });
-// { source: 'foo.coffee',
-//   line: 2,
-//   column: 2,
-//   name: null }

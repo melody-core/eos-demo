@@ -3,8 +3,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const {
   originalPositionFor,
+  findDeveloper,
   JS_TYPE_LIST,
 } = require("./lib/sourcemap");
+const ddContrulor = require('./lib/send_dingding');
 
 const port = 3001;
 
@@ -25,11 +27,21 @@ app.post("/api/report", async function (req, res) {
     return ;
   }
   const userAgent = req.headers["user-agent"];
-  console.log("body.type:", body.type);
+  let reportContent = {
+    ...body,
+  };
   if (JS_TYPE_LIST.includes(body.type)) {
     const position = await originalPositionFor(body.stack, body.filename);
-    console.log(position);
+    const developer = await findDeveloper(position)
+    console.log(developer);
+    reportContent = {
+      ...reportContent,
+      ...position,
+      ...developer,
+      userAgent
+    }
   }
+  await ddContrulor.send2developer(reportContent)
   res.send(
     JSON.stringify({
       seccess: true,
@@ -37,6 +49,8 @@ app.post("/api/report", async function (req, res) {
     })
   );
 });
+
+
 
 // mock-effct
 app.post("/api/getMockOptions", function (req, res) {
