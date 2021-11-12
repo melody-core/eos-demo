@@ -23,9 +23,6 @@ export const useSelectedOptionsChange = () => {
                     setOptions(res.data||[]);
                 }
             })
-            .catch(err=>{
-                console.log("外层捕获", err)
-            })
       }, []);
     return {
         selectedValues,

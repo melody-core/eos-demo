@@ -27,25 +27,25 @@ class DDReport {
     content += ``
     return content;
   };
-  templateStatic = ({ userAgent, type, src, input, method, body, stack }) => {
+  templateStatic = ({ userAgent, type, url, input, method, body, stack }) => {
     let content = ``;
     content += `### eos报警: \n`;
+    content += `type: ${type} \n`;
     content += `\n`;
-    content += ` type: ${type} \n`;
-    content += `\n`;
-    if (src) {
-      content += ` src: ${developer} \n`;
+    if (url) {
+      content += `src: ${url} \n`;
       content += `\n`;
     } else {
-      content += ` url: ${input} `;
+      content += `url: ${input} `;
       content += `\n`;
-      content += ` method: ${method}`;
+      content += `method: ${method}`;
       content += `\n`;
-      content += ` body: ${body}`;
+      content += `body: ${body}`;
       content += `\n`;
-      content += ` stack: ${stack}`;
+      content += `stack: ${stack}`;
       content += `\n`;
-      content += ` userAgent: ${userAgent}`;
+      content += `userAgent: ${userAgent}`;
+      content += `\n`;
     }
     return content;
   };
