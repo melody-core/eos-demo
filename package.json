@@ -7,10 +7,9 @@
     "start": "webpack serve -c ./config/dev.config.js",
     "build": "webpack -c ./config/pro.config.js",
     "eos-build": "node ./config/index.js",
-    "server": "node ./server/index.js",
-    "prepare": "node ./.melody-hooks/init.js"
+    "server": "node ./server/index.js"
   },
-  "author": "",
+  "author": "melodyWxy",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.15.8",

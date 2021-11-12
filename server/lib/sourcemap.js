@@ -3,7 +3,7 @@ const path = require("path");
 const { SourceMapConsumer } = require("source-map-js");
 const runShell = require("./runShell");
 
-const devpathReg = /(?<=.*8080\/).*/g;
+const devpathReg = /(?<=.*\d{4}\/).*/g;
 const errorReg = /(?<=.*:)\d+:\d+/g;
 const stackPathReg = /(?<=.*\d{4}\/).*(?=:\d+:\d+)/g;
 const sourceReg = /(?<=.*client).*/g;

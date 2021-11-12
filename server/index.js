@@ -31,9 +31,10 @@ app.post("/api/report", async function (req, res) {
     ...body,
   };
   if (JS_TYPE_LIST.includes(body.type)) {
+    // 源码追踪
     const position = await originalPositionFor(body.stack, body.filename);
+    // 开发者追踪
     const developer = await findDeveloper(position)
-    console.log(developer);
     reportContent = {
       ...reportContent,
       ...position,
@@ -41,6 +42,7 @@ app.post("/api/report", async function (req, res) {
       userAgent
     }
   }
+  // 强通知
   await ddContrulor.send2developer(reportContent)
   res.send(
     JSON.stringify({
