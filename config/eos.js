@@ -1,22 +1,5 @@
-const webpack = require('webpack');
-const path  = require('path');
-const fs = require('fs');
+// 打包出的map文件所在路径
+const SOURCE_MAP_PATH = path.resolve(__dirname, "./../dist");
 
-const webpackConfig = require('./pro.config');
-
-const mapReg = /.*\.map/
-
-const targetPath = path.resolve(__dirname, './../server/.maps');
-const sourceMap = path.resolve(__dirname,'./../dist'); 
-
-const compiler = webpack(webpackConfig);
-
-compiler.run(()=>{
-    const dirs = fs.readdirSync(sourceMap);
-    const mapFiles = dirs.filter(dir=>dir.match(mapReg));
-    mapFiles.forEach((sourceFile)=>fs.promises.rename(`${sourceMap}/${sourceFile}`, `${targetPath}/${sourceFile}`)
-        .then(()=>{
-            console.info('move file successful')
-        })
-        .catch(console.error)
-)})
+// 目标传输路径
+const TARGET_PATH = path.resolve(__dirname, "./../server/.maps");
